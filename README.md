@@ -23,7 +23,7 @@ go get github.com/xDeFc0nx/nlog
 ```go
 package main
 
-import "github.com/yourusername/nlog"
+import "github.com/xDeFc0nx/nlog"
 
 func main() {
     // Info logging
