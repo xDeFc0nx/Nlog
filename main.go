@@ -11,7 +11,7 @@ type Log struct {
 	Trace string `json:"trace"`
 }
 
-func Info(msg string, context map[string]any) {
+func Info(msg string, context ...map[string]any) {
 	logEntry := Log{
 		Level: "INFO",
 		Msg:   msg,
@@ -22,14 +22,14 @@ func Info(msg string, context map[string]any) {
 		"msg":   logEntry.Msg,
 	}
 
-	if context != nil {
-		maps.Copy(data, context)
+	if len(context) > 0 && context[0] != nil {
+		maps.Copy(data, context[0])
 	}
 
 	fmt.Println(Prettify(data))
 }
 
-func Warn(msg string, context map[string]any) {
+func Warn(msg string, context ...map[string]any) {
 	logEntry := Log{
 		Level: "WARN",
 		Msg:   msg,
@@ -40,13 +40,14 @@ func Warn(msg string, context map[string]any) {
 		"msg":   logEntry.Msg,
 	}
 
-	if context != nil {
-		maps.Copy(data, context)
+	if len(context) > 0 && context[0] != nil {
+		maps.Copy(data, context[0])
 	}
 
 	fmt.Println(Prettify(data))
 }
-func Error(err error, context map[string]any) {
+
+func Error(err error, context ...map[string]any) {
 	if err == nil {
 		return
 	}
@@ -66,8 +67,8 @@ func Error(err error, context map[string]any) {
 		"trace": logEntry.Trace,
 	}
 
-	if context != nil {
-		maps.Copy(data, context)
+	if len(context) > 0 && context[0] != nil {
+		maps.Copy(data, context[0])
 	}
 
 	fmt.Println(Prettify(data))
